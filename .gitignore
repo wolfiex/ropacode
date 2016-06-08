@@ -46,3 +46,6 @@ _ReSharper*/
 *.nc
 *.swp
 *.mp4
+*.json
+*.dat
+
