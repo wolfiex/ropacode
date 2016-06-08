@@ -40,7 +40,7 @@ def update_plt(num):
     plt.cla()
     plt.title(datetime.datetime.fromtimestamp(timestep*10*60).strftime('%d %H:%M'))
     #plt.xlim(0, 1)
-    plt.ylim(-200, 100)
+    plt.ylim(-70, 30)
     plt.xlabel('index')
     plt.ylabel('conc/M')
     
@@ -52,7 +52,7 @@ def update_plt(num):
 
 # Set up formatting for the movie files
 Writer = animation.writers['ffmpeg']
-writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+writer = Writer(fps=30, metadata=dict(artist='Me'), bitrate=1800)
 
 
 for group in netCDF_data.groups:
@@ -62,7 +62,8 @@ for group in netCDF_data.groups:
     s_file = pd.DataFrame(netCDF_data.groups[group].variables['Spec'][:])
     s_file.columns = str(netCDF_data.groups[group].variables['Spec'].head).split(',')
     
-    runs = s_file.index# [0] #### LAST RUN NEEDS TO BE ONE WITH GREATEST NO REACTIONS! ### 144,288,431,    
+    runs = xrange(0,len(s_file.index),1)# [0] #### LAST RUN NEEDS TO BE ONE WITH GREATEST NO REACTIONS! ### 144,288,431,    
+    
     cm = colourmap(min(runs),max(runs))
     fig1 = plt.figure()
 
