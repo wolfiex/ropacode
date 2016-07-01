@@ -49,5 +49,5 @@ _ReSharper*/
 *.json
 *.dat
 *.pdf
-
+*.pyc
 
