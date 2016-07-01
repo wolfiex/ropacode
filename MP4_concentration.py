@@ -44,8 +44,10 @@ def update_plt(num):
     plt.xlabel('index')
     plt.ylabel('conc/M')
     
-    line = [plt.plot(s_file.ix[timestep].map(lambda x: np.log10(x/s_file.loc[timestep,'M'])) ,color=cm(num), label=num)]#,'r'
-
+    a = s_file.ix[timestep]
+    a.sort()
+    line = [(a.map(lambda x: -1*abs(np.log10(x/s_file.loc[timestep,'M'])+1))).plot( kind = 'area', color=cm(num), label=num) ]  #,'r'
+    #line = [(a.map(lambda x: abs(np.log10(x/s_file.loc[timestep,'M'])))).plot(  color=cm(num), label=num) ]  #,'r'
     return line,
 
 
@@ -68,7 +70,7 @@ for group in netCDF_data.groups:
     fig1 = plt.figure()
 
     line_ani = animation.FuncAnimation(fig1, update_plt, len(runs), fargs=(), interval=50, blit=True)
-    
+    print 'runs/4'
     line_ani.save('%s.mp4'%group, writer=writer)
 
 
