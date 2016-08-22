@@ -29,7 +29,7 @@ for group in netCDF_data.groups:
     pp = PdfPages('%s.pdf'%group)
     
     
-    for i in xrange(0, len(spc.columns)/100, 6):
+    for i in xrange(0, len(spc.columns), 6):
         spc[spc.columns[i:i+5]].plot(subplots=True)
         plt.tight_layout() 
         plt.ylabel('mix ratio')
